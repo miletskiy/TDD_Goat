@@ -1,9 +1,10 @@
-from django.test import LiveServerTestCase
+# from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 # import unittest
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
 
     def setUp(self):
@@ -46,7 +47,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
-        self.check_for_row_in_list_table('1:Buy peacock feathers')
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
 
         # import time
         # time.sleep(10)
@@ -67,8 +68,8 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # The page updates again, and now shows both items on her list
-        self.check_for_row_in_list_table('2:Use peacock feathers to make a fly')
-        self.check_for_row_in_list_table('1:Buy peacock feathers')
+        self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
 
                         # table = self.browser.find_element_by_id('id_list_table')
                         # rows = table.find_elements_by_tag_name('tr')
