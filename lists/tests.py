@@ -21,6 +21,16 @@ class HomePageTest(TestCase):
         self.assertIn(b'<title>To-Do lists</title>',response.content)
         self.assertTrue(response.content.strip().endswith(b'</html>'))
 
+    def test_home_page_get_correct_css(self):
+        pass
+        # request = HttpRequest()
+        # request.method = 'POST'
+        # request.POST['item_text'] = 'A new list item'
+
+        # response = home_page(request)
+        
+        # self.assertEqual(response.status_code,302)
+        # self.assertEqual(response['location'],'/lists/the-only-list-in-the-world/')
 
 
         # self.assertIn('A new list item',response.content.decode())
