@@ -17,12 +17,13 @@ class HomePageTest(TestCase):
         response = home_page(request)
         expected_html = render_to_string('home.html')
         self.assertEqual(response.content.decode(),expected_html)
-        self.assertTrue(response.content.startswith(b'<html>'))
-        self.assertIn(b'<title>To-Do lists</title>',response.content)
-        self.assertTrue(response.content.strip().endswith(b'</html>'))
+        # self.assertTrue(response.content.startswith(b'<html>'))
+        # # self.assertTrue(response.content.startswith(b'<!DOCTYPE html>'))
+        # self.assertIn(b'<title>To-Do lists</title>',response.content)
+        # self.assertTrue(response.content.strip().endswith(b'</html>'))
 
-    def test_home_page_get_correct_css(self):
-        pass
+    # def test_home_page_get_correct_css(self):
+    #     pass
         # request = HttpRequest()
         # request.method = 'POST'
         # request.POST['item_text'] = 'A new list item'
