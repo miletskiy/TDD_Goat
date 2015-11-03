@@ -33,7 +33,7 @@ class ItemValidationTest(FunctionalTest):
         self.check_for_row_in_list_table('1: Buy one bottle of milk')
         self.check_for_row_in_list_table('2: Make cup of tea')
 
-        self.fail('write me!')
+        # self.fail('write me!')
 
 
 
