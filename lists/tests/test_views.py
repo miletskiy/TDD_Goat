@@ -7,18 +7,21 @@ from django.utils.html import escape
 
 from lists.models import Item, List
 from lists.views import home_page
+from lists.forms import ItemForm
 
 class HomePageTest(TestCase):
+    # maxDiff = None
 
-    def test_root_url_resolves_to_home_page_view(self):
-        found = resolve('/')
-        self.assertEqual(found.func,home_page)
+    # def test_root_url_resolves_to_home_page_view(self):
+    #     found = resolve('/')
+    #     self.assertEqual(found.func,home_page)
 
-    def test_home_page_returns_correct_html(self):
-        request = HttpRequest()
-        response = home_page(request)
-        expected_html = render_to_string('home.html')
-        self.assertEqual(response.content.decode(),expected_html)
+    # def test_home_page_returns_correct_html(self):
+    #     request = HttpRequest()
+    #     response = home_page(request)
+    #     expected_html = render_to_string('home.html', {'form': ItemForm()})
+    #     self.assertMultiLineEqual(response.content.decode(),expected_html)
+        # self.assertEqual(response.content.decode(),expected_html)
         # self.assertTrue(response.content.startswith(b'<html>'))
         # # self.assertTrue(response.content.startswith(b'<!DOCTYPE html>'))
         # self.assertIn(b'<title>To-Do lists</title>',response.content)
@@ -29,6 +32,14 @@ class HomePageTest(TestCase):
         # request = HttpRequest()
         # request.method = 'POST'
         # request.POST['item_text'] = 'A new list item'
+
+    def test_home_page_renders_home_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
 
         # response = home_page(request)
         
