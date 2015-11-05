@@ -17,13 +17,13 @@
             <div class="col-md-6 col-md-offset-3 jumbotron">
                 <div class="text-center">               
                     <h1> {% block header_text %}{% endblock header_text %} </h1>
-                    <form method="POST" action="{% block form_action %} {% url 'new_list' %} {% endblock form_action %} ">
+                    <form method="POST" action="{% block form_action %}{% endblock form_action %} ">
                         {{ form.text }}
                         {% csrf_token %}
-                        {% if error %}
-                        <div class="form-group has-error">
-                            <span class="help-block" > {{ error }} </span>
-                        </div>
+                        {% if form.errors %}
+                            <div class="form-group has-error">
+                                <span class="help-block" > {{ form.text.errors }} </span>
+                            </div>
                         {% endif %}
                     </form>
                 </div>
