@@ -3,9 +3,18 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from lists.models import Item, List
-from lists.forms import ItemForm
+from lists.forms import ItemForm, ExistingListItemForm
+from django.views.generic import FormView
 
 # Create your views here.
+class HomePageView(FormView):
+	"""docstring for HomePageView"""
+	template_name = 'home.html'
+	form_class = ItemForm
+		
+
+
+
 def home_page(request):
 	# if request.method == 'POST':
 	# 	return HttpResponse(request.POST['item_text'])
@@ -19,12 +28,15 @@ def home_page(request):
 
 def view_list(request, list_id):
 	list_ = List.objects.get(id=list_id)
-	form = ItemForm()
+	# form = ItemForm()
+	form = ExistingListItemForm(for_list=list_)
 	if request.method == 'POST':
-		form = ItemForm(data=request.POST)
+		# form = ItemForm(data=request.POST)
+		form = ExistingListItemForm(for_list=list_, data=request.POST)
 		if form.is_valid():
 			# Item.objects.create(text=request.POST['text'], list=list_)
-			form.save(for_list=list_)
+			form.save()
+			# form.save(for_list=list_)
 			return redirect(list_)
 
 	return render(request,'list.html', {'list': list_, 'form': form})
