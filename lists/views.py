@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from lists.models import Item, List
 from lists.forms import ItemForm, ExistingListItemForm
-from django.views.generic import FormView
+from django.views.generic import FormView, CreateView
 
 # Create your views here.
 class HomePageView(FormView):
@@ -12,7 +12,15 @@ class HomePageView(FormView):
 	template_name = 'home.html'
 	form_class = ItemForm
 		
+class NewListView(CreateView, HomePageView):
 
+	def form_valid(self, form):
+		# list_ = List.objects.create()
+		# form.save(for_list=list_)
+		# return redirect(list_)
+		list = List.objects.create()
+		Item.objects.create(text=form.cleaned_data['text'], list=list)
+		return redirect('/lists/%d/' % (list.id,))
 
 
 def home_page(request):

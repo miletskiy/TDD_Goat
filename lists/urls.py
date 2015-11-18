@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from lists import views
+from lists.views import NewListView
+
 
 urlpatterns = [
-    url(r'^new$', views.new_list, name='new_list'),
+    url(r'^new$', NewListView.as_view(), name='new_list'),
+    # url(r'^new$', views.new_list, name='new_list'),
     url(r'^(\d+)/$', views.view_list, name='view_list'),
 	# url(r'^(\d+)/add_item$', views.add_item, name='add_item'),
 ]
