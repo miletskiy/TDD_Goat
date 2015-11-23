@@ -22,7 +22,7 @@ from lists.views import HomePageView
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
-	# url(r'^$', list_views.home_page, name='home'),
+    # url(r'^$', list_views.home_page, name='home'),
     url(r'^lists/', include(list_urls)),
     # url(r'^admin/', include(admin.site.urls)),
 ]
